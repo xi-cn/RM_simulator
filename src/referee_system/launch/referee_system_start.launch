@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="referee_system" type="countdown_node" name="countdown_node" output="screen"/>
+    <node pkg="referee_system" type="referee_system_node" name="referee_system_node"/>
+</launch>
