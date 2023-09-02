@@ -1,0 +1,121 @@
+<?xml version="1.0" ?>
+<robot name="DIODE_robot">
+
+    <link name="base_link">
+        <visual>
+            <origin xyz=" 0 0 0.0975" rpy="0 0 0" />
+            <geometry>
+                <box size="0.55 0.45 0.18"/>
+            </geometry>
+            <material name="white">
+                <color rgba="1 1 1 1"/>
+            </material>
+        </visual>
+    </link>   
+
+    <joint name="left_wheel_joint" type="continuous">
+        <origin xyz="-0.085 0.0975 0.0375" rpy="1.57 0 0"/>
+        <parent link="base_link"/>
+        <child link="left_wheel_link"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <link name="left_wheel_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <cylinder radius="0.0375" length = "0.03"/>
+            </geometry>
+            <material name="black">
+                <color rgba="0 0 0 1"/>
+            </material>
+        </visual>
+    </link>
+
+    <joint name="right_wheel_joint" type="continuous">
+        <origin xyz="-0.085 -0.0975 0.0375" rpy="1.57 0 0"/>
+        <parent link="base_link"/>
+        <child link="right_wheel_link"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <link name="right_wheel_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <cylinder radius="0.0375" length = "0.03"/>
+            </geometry>
+            <material name="black">
+                <color rgba="0 0 0 1"/>
+            </material>
+        </visual>
+    </link>
+
+      <joint name="left_front_joint" type="continuous">
+        <origin xyz="0.085 0.0975 0.0375" rpy="1.57 0 0"/>
+        <parent link="base_link"/>
+        <child link="left_front_link"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <link name="left_front_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <cylinder radius="0.0375" length = "0.03"/>
+            </geometry>
+            <material name="black">
+                <color rgba="0 0 0 1"/>
+            </material>
+        </visual>
+    </link>
+
+    <joint name="right_front_joint" type="continuous">
+        <origin xyz="0.085 -0.0975 0.0375" rpy="1.57 0 0"/>
+        <parent link="base_link"/>
+        <child link="right_front_link"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <link name="right_front_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <cylinder radius="0.0375" length = "0.03"/>
+            </geometry>
+            <material name="black">
+                <color rgba="0 0 0 1"/>
+            </material>
+        </visual>
+    </link>
+	
+	<!-- 机器人的其他部分 -->
+  
+  <!-- 2D雷达传感器 -->
+  <sensor name="lidar_sensor" type="ray">
+    <!-- 雷达传感器的参数 -->
+    <ray>
+      <scan>
+        <horizontal>
+          <samples>360</samples>
+          <resolution>1</resolution>
+          <min_angle>-3.14</min_angle>
+          <max_angle>3.14</max_angle>
+        </horizontal>
+      </scan>
+      <range>
+        <min>0.01</min>
+        <max>50</max>
+        <resolution>0.01</resolution>
+      </range>
+    </ray>
+    <!-- 雷达传感器的链接 -->
+    <visual>
+      <origin xyz="0 0 0.25" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.1" length="0.1"/>
+      </geometry>
+    </visual>
+  </sensor>
+
+</robot>

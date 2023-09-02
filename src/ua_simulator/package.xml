@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>ua_simlator</name>
+  <name>ua_simulator</name>
   <version>0.0.0</version>
-  <description>The ua_simlator package</description>
+  <description>The ua_simulator package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
