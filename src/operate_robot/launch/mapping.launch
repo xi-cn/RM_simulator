@@ -1,0 +1,65 @@
+
+<launch>
+  <arg name="mapping_mode"  default="hector" doc="opt: gmapping,hector,cartographer,karto"/>
+  <!--因为机器人模型会发布一个base_footprint,而robot_pose_ekf也会发布一个-->
+  <!-- <param name="/robot_name/base_footprint" value="base_footprint"/> -->
+
+  <arg name="repeat"  default="false"/>
+  <!-- 是否在建图时开启导航 默认不开启 仅在rrt自主建图时同时进行-->
+  <arg name="navigation" default="false"/>
+  <arg name="odom_frame_id"  default="odom"/>
+
+  <!-- 开启仿真环境  -->
+  <include file="$(find ua_simulator)/launch/simulation_start.launch" >
+    <arg name="x_pos" default="0.0"/>
+    <arg name="y_pos" default="0.0"/>
+    <arg name="z_pos" default="0.0"/>
+  </include>
+
+  <!-- 启动APP一键保存地图功能  -->
+  <node pkg="world_canvas_msgs" type="save" name="save_map" />
+
+<!-- 启动键盘控制节点 -->
+  <include file="$(find tele_control)/launch/tele_control.launch"/>
+  <!-- 开启gmapping建图算法  -->
+  <group if="$(eval mapping_mode == 'gmapping')">
+  <include file="$(find operate_robot)/launch/algorithm_gmapping.launch" />
+  <!-- 扩张卡尔曼滤波 发布odom到footprint的TF,即小车定位 使用cartographer算法时不使用该滤波算法-->
+  <!-- 目前无法使用，还没解决两个base_footprint的问题,建议不要通过robot_state_publisher发布tf,而是通过tf节点静态发布，就不会有这样的问题 -->
+  <!-- <include file="$(find operate_robot)/launch/robot_pose_ekf.launch" >
+    <arg name="is_cartographer" value="false"/>
+  </include> -->
+  </group>
+
+  <!-- 开启hector建图算法  -->
+  <group if="$(eval mapping_mode == 'hector')">
+  <include file="$(find operate_robot)/launch/algorithm_hector.launch" />
+  <!-- 扩张卡尔曼滤波 发布odom到footprint的TF,即小车定位 使用cartographer算法时不使用该滤波算法-->
+  <!-- 目前无法使用，还没解决两个base_footprint的问题,建议不要通过robot_state_publisher发布tf,而是通过tf节点静态发布，就不会有这样的问题 -->
+  <!-- <include file="$(find operate_robot)/launch/robot_pose_ekf.launch" >
+    <arg name="is_cartographer" value="false"/>
+  </include> -->
+  </group> 
+
+   <!-- 开启karto建图算法  -->
+  <group if="$(eval mapping_mode == 'karto')">
+  <include file="$(find operate_robot)/launch/algorithm_karto.launch" />
+  <!-- 扩张卡尔曼滤波 发布odom到footprint的TF,即小车定位 使用cartographer算法时不使用该滤波算法-->
+  <!-- 目前无法使用，还没解决两个base_footprint的问题,建议不要通过robot_state_publisher发布tf,而是通过tf节点静态发布，就不会有这样的问题 -->
+  <!-- <include file="$(find operate_robot)/launch/robot_pose_ekf.launch" >
+    <arg name="is_cartographer" value="false"/>
+  </include> -->
+  </group>  
+
+   <!-- 开启cartographer建图算法  -->
+  <group if="$(eval mapping_mode == 'cartographer')">
+  <include file="$(find cartographer_ros)/launch/2d_online.launch" />
+  <!-- 开启机器人底层相关节点  -->
+  <include file="$(find turn_on_wheeltec_robot)/launch/turn_on_wheeltec_robot.launch">
+    <arg name="navigation" value="$(arg navigation)"/>
+    <arg name="is_cartographer" value="true"/>
+    <arg name="odom_frame_id"   value="$(arg odom_frame_id)"/>
+  </include>
+  </group>  
+
+</launch>

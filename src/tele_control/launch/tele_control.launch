@@ -1,0 +1,3 @@
+<launch>
+    <node pkg="tele_control" name="tele_control" type="tele_control"/>
+</launch>

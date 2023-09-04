@@ -1,0 +1,27 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/zzq/RM_simulator/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/zzq/RM_simulator/src/operate_robot/include/**",
+        "/home/zzq/RM_simulator/src/referee_system/include/**",
+        "/home/zzq/RM_simulator/src/robot_pose_ekf/include/**",
+        "/home/zzq/nav_simulator/src/simulator/include/**",
+        "/home/zzq/RM_simulator/src/tele_control/include/**",
+        "/home/zzq/RM_simulator/src/ua_simulator/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

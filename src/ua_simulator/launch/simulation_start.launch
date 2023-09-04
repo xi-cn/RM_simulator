@@ -1,14 +1,10 @@
 <launch>
-  <!-- 启动Gazebo仿真 -->
-  <arg name="world_file" default="$(find ua_simulator)/world/ua_world.world"/>
-  <arg name="gui" default="true"/>
-  <node name="gazebo" pkg="gazebo_ros" type="gazebo" output="screen" args="$(arg world_file) "/>
-
-  <!-- 加载URDF模型 -->
-  <arg name="urdf_file" default="$(find ua_simulator)/urdf/mini_mec_robot.urdf"/>
-  <param name = "robot_description" textfile = "$(find ua_simulator)/urdf/mini_mec_robot.urdf"/>
-  <!-- 读取urdf信息(robot_description) 发布话题：/joint_states-->
-  <node  name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
-  <!-- 订阅话题：/joint_states，发布小车TF信息-->
-  <node  name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  <arg name="x_pos" default="0.0"/>
+  <arg name="y_pos" default="0.0"/>
+  <arg name="z_pos" default="0.0"/>
+  <param name="/use_sim_time" value="true" />  
+  <include file="$(find ua_simulator)/launch/ua_world.launch"/>
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find ua_simulator)/urdf/DIODE_robot.urdf.xacro" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model robot_description -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 </launch>

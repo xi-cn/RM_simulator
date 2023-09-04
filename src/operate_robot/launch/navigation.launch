@@ -1,0 +1,37 @@
+
+<launch>
+   <arg name="smoother"  default="false"/> <!-- 是否开启速度平滑功能 -->
+ <!--当开启导航功能时 启用导航算法选择-->
+  <!--当开启2D或3D导航功能时-->
+  <!-- 开启teb_local_planner导航算法 与dwa算法相比效果更佳-->
+  <include file="$(find operate_robot)/launch/teb_local_planner.launch">
+  <!-- 开启dwa_local_planner导航算法-->
+  <!-- <include file="$(find turn_on_wheeltec_robot)/launch/include/dwa_local_planner.launch" if="$(arg navigation)"> -->
+  </include>
+<!-- 开启仿真环境  -->
+  <include file="$(find ua_simulator)/launch/simulation_start.launch" >
+    <arg name="x_pos" default="0.0"/>
+    <arg name="y_pos" default="0.0"/>
+    <arg name="z_pos" default="0.0"/>
+  </include>
+  
+ <!-- 设置需要用于导航的地图  -->
+ <arg name="map_file" default="$(find operate_robot)/map/map.yaml"/>
+ <node name="map_server_for_test" pkg="map_server" type="map_server" args="$(arg map_file)">
+ </node>
+<!-- 启动键盘控制节点 -->
+  <include file="$(find tele_control)/launch/tele_control.launch"/>
+
+<!-- 如果开启了速度平滑功能，则运行速度平滑功能包 -->
+  <include if="$(arg smoother)" 
+    file="$(find operate_robot)/launch/velocity_smoother.launch" >
+  </include>
+
+ <!-- 开启用于导航的自适应蒙特卡洛定位amcl-->
+ <include file="$(find operate_robot)/launch/amcl.launch" />
+
+</launch>
+
+
+
+
