@@ -22,6 +22,8 @@
 <!-- 启动键盘控制节点 -->
   <include file="$(find tele_control)/launch/tele_control.launch"/>
 
+<!-- 启动rviz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find operate_robot)/rviz/navigation.rviz" />
 <!-- 如果开启了速度平滑功能，则运行速度平滑功能包 -->
   <include if="$(arg smoother)" 
     file="$(find operate_robot)/launch/velocity_smoother.launch" >
