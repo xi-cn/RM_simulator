@@ -10,7 +10,7 @@
   <arg name="odom_frame_id"  default="odom"/>
 
   <!-- 开启仿真环境  -->
-  <include file="$(find ua_simulator)/launch/simulation_start.launch" >
+  <include file="$(find ua_simulator)/launch/ua_simulation_start.launch" >
     <arg name="x_pos" default="0.0"/>
     <arg name="y_pos" default="0.0"/>
     <arg name="z_pos" default="0.0"/>
