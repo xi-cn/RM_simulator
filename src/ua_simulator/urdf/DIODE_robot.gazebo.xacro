@@ -46,7 +46,7 @@
       <alwaysOn>true</alwaysOn>
       <bodyName>$(arg robot_name)/imu</bodyName>  
       <frameName>imu</frameName>
-      <topicName>imu</topicName>
+      <topicName>imu_topic</topicName>
       <serviceName>imu_service</serviceName>
       <gaussianNoise>0.0</gaussianNoise>
       <updateRate>0</updateRate>
