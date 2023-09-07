@@ -10,10 +10,10 @@
   <arg name="odom_frame_id"  default="odom"/>
 
   <!-- 开启仿真环境  -->
-  <include file="$(find ua_simulator)/launch/ua_simulation_start.launch" >
-    <arg name="x_pos" default="0.0"/>
-    <arg name="y_pos" default="0.0"/>
-    <arg name="z_pos" default="0.0"/>
+  <include file="$(find ua_simulator)/launch/uc_simulation_start.launch" >
+    <arg name="x_pos" default="7.5"/>
+    <arg name="y_pos" default="4"/>
+    <arg name="z_pos" default="0.1"/>
   </include>
 
   <!-- 启动APP一键保存地图功能  -->
@@ -62,4 +62,6 @@
   </include>
   </group>  
 
+  <!-- 启动rviz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find operate_robot)/rviz/mapping.rviz" />
 </launch>
