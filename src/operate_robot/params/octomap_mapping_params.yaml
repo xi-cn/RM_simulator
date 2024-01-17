@@ -1,0 +1,3 @@
+cloud_topic: /your/pointcloud/topic
+frame_id: /your_frame_id
+publish_binary_map: true

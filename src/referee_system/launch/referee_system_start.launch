@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="referee_system" type="referee_system_node" name="referee_system_node"/>
+    <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
+</launch>

@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="tele_control" name="tele_control" type="tele_control"/>
+    <node pkg="tele_control" name="keyboard_read" type="keyboard_read"/>
+</launch>

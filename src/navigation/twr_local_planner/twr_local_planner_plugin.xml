@@ -1,0 +1,7 @@
+<library path="lib/libtwr_local_planner">
+  <class name="twr_local_planner/TWRPlannerROS" type="twr_local_planner::TWRPlannerROS" base_class_type="nav_core::BaseLocalPlanner">
+    <description>
+      A implementation of a local planner using either a TWR(translation without rotation) approach based on configuration parameters.
+    </description>
+  </class>
+</library>

@@ -1,0 +1,37 @@
+DWAPlannerROS:
+
+  max_vel_trans: 2.5 #平移速度最大值
+  min_vel_trans: -2.5 #平移速度最小值
+  
+  max_vel_x: 2.5 #x方向最大速度
+  min_vel_x: -2.5 #x方向最小值绝对值,如果为负值表示可以后退
+
+  max_vel_y: 2.5 #y方向最大速度
+  min_vel_y: -2.5 #y方向最小速度
+
+  max_vel_theta: 2.5 #最大角速度
+  min_vel_theta: -2.5 #最小角速度
+
+  acc_lim_x: 2.5 #x方向的加速度
+  acc_lim_y: 1.5 #y方向的加速度,一般为0
+  acc_lim_theta: 2.5 #旋转加速度
+  acc_lim_trans: 2.5
+
+  xy_goal_tolerance: 0.2 #距离目标在xy方向与目标点的距离误差
+  yaw_goal_tolerance: 1.0 #距离目标点偏行角允许的误差，单位弧度
+  latch_xy_goal_tolerance: false #设置为true,如果到达容错距离内,机器人就会原地旋转,即使转动是会跑出容错距离外
+
+  sim_time: 2.0 #向前仿真轨迹的时间
+  sim_granularity: 0.025 #步长,轨迹上采样点之间的距离,轨迹上点的密集程度
+  angular_sim_granularity: 0.1 #旋转步长
+  path_distance_bias: 64.0     # 32.0 定义控制器与给定路径接近程度的权重
+  goal_distance_bias: 24.0      # 24.0 定义控制器与局部目标点的接近程度的权重
+  forward_point_distance: 0.2 # 0.325
+  occdist_scale: 0.01            # 0.01 转弯处过不去，把这个参数设置小一点
+  # pdist_scale: 0.5
+
+  vx_samples: 10 #x方向速度空间的采样点数
+  vy_samples: 0  #y方向速度空间的采样点数
+  vth_samples: 40 #旋转方向的速度空间采样点数
+
+
